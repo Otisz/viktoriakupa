@@ -3,7 +3,6 @@ import createServer from "@inertiajs/react/server";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { PostHogProvider } from "posthog-js/react";
 import ReactDOMServer from "react-dom/server";
-import { type Config, type RouteName, type RouteParams, route } from "ziggy-js";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
@@ -18,13 +17,6 @@ createServer((page) =>
         import.meta.glob<ResolvedComponent>("./pages/**/*.tsx", { import: "default" }),
       ),
     setup: ({ App, props }) => {
-      const ziggy = page.props.ziggy as Config & { location: string };
-      (globalThis as Record<string, unknown>).route = (
-        name: RouteName,
-        params?: RouteParams<RouteName>,
-        absolute?: boolean,
-      ) => route(name, params, absolute, { ...ziggy, location: new URL(ziggy.location) });
-
       return (
         <PostHogProvider
           apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}

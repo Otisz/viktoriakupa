@@ -1,7 +1,7 @@
 import { Head, Link } from "@inertiajs/react";
 import { buttonVariants } from "@/components/ui/button";
-import PostCard from "@/featuers/posts/post-card";
-import PostsWrapper from "@/featuers/posts/posts-wrapper";
+import PostCard from "@/features/posts/post-card";
+import PostsWrapper from "@/features/posts/posts-wrapper";
 import AppLayout from "@/layouts/app-layout";
 import { cn } from "@/lib/utils";
 import type { Pagination, Post, SharedData } from "@/types";

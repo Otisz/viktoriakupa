@@ -13,10 +13,8 @@
 
     <link rel="manifest" href="/site.webmanifest" crossOrigin="use-credentials" />
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600" rel="stylesheet" />
+    <link rel="preload" href="/fonts/capriola/capriola-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-    @routes
     @viteReactRefresh
     @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
     @inertiaHead

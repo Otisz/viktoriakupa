@@ -1,9 +1,9 @@
 import { Link } from "@inertiajs/react";
-import { LuArrowRight } from "react-icons/lu";
+import { ArrowRight } from "lucide-react";
 import contributors from "@/data/contributors";
 import sponsors from "@/data/sponsors";
-import PostCard from "@/featuers/posts/post-card";
-import PostsWrapper from "@/featuers/posts/posts-wrapper";
+import PostCard from "@/features/posts/post-card";
+import PostsWrapper from "@/features/posts/posts-wrapper";
 import AppLayout from "@/layouts/app-layout";
 import type { Post, SharedData } from "@/types";
 
@@ -33,7 +33,7 @@ export default function Page(props: SharedData<{ posts: Post[] }>) {
               </PostsWrapper>
 
               <Link href="/hirek" className="not-prose mt-8 block text-center text-gray-900 text-xl hover:text-primary">
-                Korábbi hírek <LuArrowRight className="inline-block" />
+                Korábbi hírek <ArrowRight className="inline-block size-5" />
               </Link>
             </div>
           </section>
