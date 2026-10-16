@@ -1,8 +1,11 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { FaFacebookSquare } from "react-icons/fa";
 import LINKS from "@/data/links";
+import type { SharedData } from "@/types";
 
 export default function Footer() {
+  const page = usePage();
+
   return (
     <footer className="bg-gray-900">
       <div className="container pt-16 pb-8 sm:pt-24 lg:pt-32">
@@ -34,19 +37,13 @@ export default function Footer() {
                       Egyesületek
                     </Link>
                   </li>
-                  <li>
-                    <Link href={LINKS.rules} className="text-gray-300 text-sm leading-6 hover:text-white">
-                      Szabályzatok
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={LINKS.competition_announcements}
-                      className="text-gray-300 text-sm leading-6 hover:text-white"
-                    >
-                      Versenykiírások
-                    </Link>
-                  </li>
+                  {Object.entries((page.props as unknown as SharedData).documentTypes).map(([slug, title]) => (
+                    <li key={slug}>
+                      <Link href={`/dokumentumok/${slug}`} className="text-gray-300 text-sm leading-6 hover:text-white">
+                        {title}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
                 <ul className="space-y-4">
                   <li>

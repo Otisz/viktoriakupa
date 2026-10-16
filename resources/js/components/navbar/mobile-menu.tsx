@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/correctness/useUniqueElementIds: <explanation> */
 
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { FaAlignRight, FaRegCircleXmark } from "react-icons/fa6";
 import { SiFacebook } from "react-icons/si";
@@ -15,8 +15,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import LINKS from "@/data/links";
+import type { SharedData } from "@/types";
 
 export default function MobileMenu() {
+  const page = usePage();
+
   return (
     <Sheet>
       <SheetTrigger aria-label="Navigációs menü megnyitása" className="block lg:hidden">
@@ -55,16 +58,16 @@ export default function MobileMenu() {
                 Egyesületek
               </Link>
             </SheetClose>
-            <SheetClose asChild>
-              <Link href={LINKS.rules} className="px-8 py-4">
-                Szabályzatok
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link href={LINKS.competition_announcements} className="px-8 py-4">
-                Versenykiírások
-              </Link>
-            </SheetClose>
+            <div className="flex flex-col py-4">
+              <span className="px-8">Dokumentumok</span>
+              {Object.entries((page.props as unknown as SharedData).documentTypes).map(([slug, title]) => (
+                <SheetClose key={slug} asChild>
+                  <Link href={`/dokumentumok/${slug}`} className="px-12 py-2 text-muted-foreground">
+                    {title}
+                  </Link>
+                </SheetClose>
+              ))}
+            </div>
             <SheetClose asChild>
               <Link href={LINKS.calendar} className="px-8 py-4">
                 Versenynaptár

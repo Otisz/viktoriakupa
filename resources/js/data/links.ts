@@ -2,8 +2,6 @@ export default {
   home: "/",
   about_us: "/rolunk",
   clubs: "/egyesuletek",
-  rules: "/szabalyzatok",
-  competition_announcements: "/versenykiirasok",
   calendar: "/versenynaptar",
   contact: "/kapcsolat",
   news: "/hirek",
