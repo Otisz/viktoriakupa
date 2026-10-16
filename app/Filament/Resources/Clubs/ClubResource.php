@@ -31,7 +31,7 @@ class ClubResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Egyesületek';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Schema $schema): Schema
     {
@@ -65,10 +65,5 @@ class ClubResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::query()->count();
     }
 }

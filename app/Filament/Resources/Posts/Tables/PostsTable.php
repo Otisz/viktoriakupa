@@ -3,11 +3,7 @@
 namespace App\Filament\Resources\Posts\Tables;
 
 use App\Models\Post;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ForceDeleteBulkAction;
-use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -27,19 +23,7 @@ class PostsTable
                     ->label('Cím')
                     ->searchable()
                     ->wrap(),
-                TextColumn::make('status')
-                    ->label('Állapot')
-                    ->badge()
-                    ->state(fn (Post $record): string => match (true) {
-                        $record->published_at === null => 'Piszkozat',
-                        $record->published_at->isFuture() => 'Időzített',
-                        default => 'Megjelent',
-                    })
-                    ->color(fn (string $state): string => match ($state) {
-                        'Piszkozat' => 'gray',
-                        'Időzített' => 'warning',
-                        default => 'success',
-                    }),
+                self::statusColumn(),
                 TextColumn::make('published_at')
                     ->label('Megjelenés dátuma')
                     ->dateTime()
@@ -61,13 +45,23 @@ class PostsTable
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
-                ]),
             ]);
+    }
+
+    public static function statusColumn(): TextColumn
+    {
+        return TextColumn::make('status')
+            ->label('Állapot')
+            ->badge()
+            ->state(fn (Post $record): string => match (true) {
+                $record->published_at === null => 'Piszkozat',
+                $record->published_at->isFuture() => 'Időzített',
+                default => 'Megjelent',
+            })
+            ->color(fn (string $state): string => match ($state) {
+                'Piszkozat' => 'gray',
+                'Időzített' => 'warning',
+                default => 'success',
+            });
     }
 }
