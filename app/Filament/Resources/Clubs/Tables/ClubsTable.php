@@ -18,6 +18,7 @@ class ClubsTable
                     ->label('Név')
                     ->searchable(),
                 ImageColumn::make('image_paths')
+                    ->disk('public')
                     ->visibility('public')
                     ->label('Kép'),
                 TextColumn::make('url')
