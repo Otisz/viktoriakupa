@@ -19,12 +19,6 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use LaraZeus\Sky\Filament\Resources\FaqResource;
-use LaraZeus\Sky\Filament\Resources\LibraryResource;
-use LaraZeus\Sky\Filament\Resources\NavigationResource;
-use LaraZeus\Sky\Filament\Resources\TagResource;
-use LaraZeus\Sky\SkyPlugin;
-use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
 
 class StudioPanelProvider extends PanelProvider
 {
@@ -66,19 +60,6 @@ class StudioPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->plugins([
-                SpatieTranslatablePlugin::make()->defaultLocales([config('app.locale')]),
-                SkyPlugin::make()
-                    ->uploadDisk('public')
-                    ->uploadDirectory('posts')
-                    ->navigationGroupLabel('Tartalmak')
-                    ->hideResources([
-                        TagResource::class,
-                        FaqResource::class,
-                        LibraryResource::class,
-                        NavigationResource::class,
-                    ]),
             ])
             ->login()
             ->passwordReset()

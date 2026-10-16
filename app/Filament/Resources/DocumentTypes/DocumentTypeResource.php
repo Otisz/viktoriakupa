@@ -2,17 +2,11 @@
 
 namespace App\Filament\Resources\DocumentTypes;
 
-use App\Filament\Resources\Documents\Pages\CreateDocument;
-use App\Filament\Resources\Documents\Pages\EditDocument;
-use App\Filament\Resources\Documents\Pages\ListDocuments;
-use App\Filament\Resources\Documents\Schemas\DocumentForm;
-use App\Filament\Resources\Documents\Tables\DocumentsTable;
 use App\Filament\Resources\DocumentTypes\Pages\CreateDocumentType;
 use App\Filament\Resources\DocumentTypes\Pages\EditDocumentType;
 use App\Filament\Resources\DocumentTypes\Pages\ListDocumentTypes;
 use App\Filament\Resources\DocumentTypes\Schemas\DocumentTypeForm;
 use App\Filament\Resources\DocumentTypes\Tables\DocumentTypesTable;
-use App\Models\Document;
 use App\Models\DocumentType;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -34,6 +28,8 @@ class DocumentTypeResource extends Resource
     protected static ?string $modelLabel = 'Dokumentum Típus';
 
     protected static ?string $pluralModelLabel = 'Dokumentum Típusok';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Schema $schema): Schema
     {

@@ -15,8 +15,8 @@ export default function PostCard(props: Props) {
           <img
             loading={props.loading}
             decoding="sync"
-            src={props.post.media[0].original_url as string}
-            alt={props.post.title.hu}
+            src={props.post.featured_image_url}
+            alt={props.post.title}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
           <time
@@ -27,10 +27,10 @@ export default function PostCard(props: Props) {
           </time>
         </div>
         <h2 className="font-semibold text-lg leading-6 transition-colors duration-300 group-hover:text-primary">
-          {props.post.title.hu}
+          {props.post.title}
         </h2>
         {"description" in props.post ? (
-          <p className="text-gray-600 text-sm leading-6">{props.post.description.hu}</p>
+          <p className="text-gray-600 text-sm leading-6">{props.post.description}</p>
         ) : null}
       </article>
     </Link>

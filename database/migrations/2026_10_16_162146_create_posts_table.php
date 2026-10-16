@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recommended_pages', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('url');
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->longText('content');
+            $table->string('featured_image');
+            $table->dateTime('published_at')->nullable()->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recommended_pages');
+        Schema::dropIfExists('posts');
     }
 };

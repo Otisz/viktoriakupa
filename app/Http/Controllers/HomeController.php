@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Club;
 use App\Models\DocumentType;
+use App\Models\Page;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use LaraZeus\Sky\Models\Post;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
         $posts = Post::query()
-            ->select(['id', 'title', 'slug', 'description', 'published_at'])
+            ->select(['id', 'title', 'slug', 'description', 'featured_image', 'published_at'])
             ->published()
             ->orderBy('published_at', 'desc')
-            ->with('media')
             ->limit(6)
             ->get();
 
@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function aboutUs()
     {
-        $about = Post::query()->page()->whereSlug('rolunk')->firstOrFail();
+        $about = Page::query()->whereSlug('rolunk')->firstOrFail();
 
         return Inertia::render('about-us', [
             'about' => $about,
@@ -55,7 +55,7 @@ class HomeController extends Controller
 
     public function calendar()
     {
-        $calendar = Post::query()->page()->whereSlug('versenynaptar')->firstOrFail();
+        $calendar = Page::query()->whereSlug('versenynaptar')->firstOrFail();
 
         return Inertia::render('calendar', [
             'calendar' => $calendar,

@@ -2,14 +2,9 @@
 
 namespace App\Filament\Resources\Clubs\Schemas;
 
-use App\Models\Club;
-use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
 
 class ClubForm
 {

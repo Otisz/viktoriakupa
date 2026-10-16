@@ -29,6 +29,8 @@ class DocumentResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Dokumentumok';
 
+    protected static ?int $navigationSort = 3;
+
     public static function form(Schema $schema): Schema
     {
         return DocumentForm::configure($schema);
