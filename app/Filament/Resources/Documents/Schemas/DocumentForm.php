@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Documents\Schemas;
 
-use App\Models\DocumentType;
+use App\Filament\Resources\DocumentTypes\Schemas\DocumentTypeForm;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -20,7 +20,10 @@ class DocumentForm
                     ->required(),
                 Select::make('document_type_id')
                     ->label('Típus')
-                    ->options(DocumentType::query()->pluck('title', 'id'))
+                    ->relationship('documentType', 'title')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm(DocumentTypeForm::components())
                     ->required(),
                 FileUpload::make('file_path')
                     ->directory('documents')
