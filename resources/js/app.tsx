@@ -1,6 +1,8 @@
+import "./instrument";
 import "../css/app.css";
 
 import { createInertiaApp, type ResolvedComponent } from "@inertiajs/react";
+import { reactErrorHandler } from "@sentry/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { PostHogProvider } from "posthog-js/react";
 import { createRoot } from "react-dom/client";
@@ -15,7 +17,11 @@ createInertiaApp({
       import.meta.glob<ResolvedComponent>("./pages/**/*.tsx", { import: "default" }),
     ),
   setup({ el, App, props }) {
-    const root = createRoot(el);
+    const root = createRoot(el, {
+      onUncaughtError: reactErrorHandler(),
+      onCaughtError: reactErrorHandler(),
+      onRecoverableError: reactErrorHandler(),
+    });
 
     root.render(
       <PostHogProvider
