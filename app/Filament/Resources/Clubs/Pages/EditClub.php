@@ -6,7 +6,6 @@ use App\Filament\Resources\Clubs\ClubResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
-use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditClub extends EditRecord

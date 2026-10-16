@@ -56,43 +56,28 @@ export interface Document {
   updated_at: string;
 }
 
-export interface RecommendedPage {
-  id: string;
-  name: string;
-  url: string;
-  created_at: string;
-  updated_at: string;
-}
-
 export interface Post {
-  id: number;
-  user_id: string;
-  title: {
-    hu: string;
-  };
+  id: string;
+  title: string;
   slug: string;
-  description: {
-    hu: string | null;
-  };
-  content: {
-    hu: string;
-  };
-  media: Record<string, unknown>[];
-  featured_image: null;
-  post_type: "post";
-  parent_id: null;
-  ordering: number;
-  password: null;
-  status: "publish";
-  sticky_until: null;
+  description: string | null;
+  content: string;
+  featured_image: string;
+  featured_image_url: string;
   published_at: string;
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
 }
 
-export interface Page extends Post {
-  post_type: "page";
+export interface Page {
+  id: string;
+  title: string;
+  slug: string;
+  description: string | null;
+  content: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Club {

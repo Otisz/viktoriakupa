@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 use Inertia\Inertia;
-use LaraZeus\Sky\Models\Post;
+use Inertia\Response;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         $posts = Post::query()
-            ->select(['id', 'title', 'slug', 'description', 'published_at'])
+            ->select(['id', 'title', 'slug', 'description', 'featured_image', 'published_at'])
             ->published()
             ->orderBy('published_at', 'desc')
-            ->with('media')
             ->simplePaginate();
 
         return Inertia::render('posts', [
@@ -22,13 +21,12 @@ class PostController extends Controller
         ]);
     }
 
-    public function show(string $slug)
+    public function show(string $slug): Response
     {
         $post = Post::query()
-            ->select(['id', 'title', 'slug', 'description', 'content', 'published_at'])
+            ->select(['id', 'title', 'slug', 'description', 'content', 'featured_image', 'published_at'])
             ->published()
             ->whereSlug($slug)
-            ->with('media')
             ->firstOrFail();
 
         return Inertia::render('post', [
