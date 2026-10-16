@@ -20,7 +20,7 @@ class Club extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, array $attributes) => Storage::url($attributes['image_paths']),
+            get: fn ($value, array $attributes) => Storage::disk('public')->url($attributes['image_paths']),
         );
     }
 }

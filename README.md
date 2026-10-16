@@ -22,7 +22,7 @@ docker compose up -d
 | Admin | http://localhost:8000/studio |
 | Vite | http://localhost:5173 |
 | Mailpit | http://localhost:8025 |
-| MySQL | localhost:3306 |
+| PostgreSQL | localhost:5432 |
 
 ### SSR
 
