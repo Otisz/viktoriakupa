@@ -29,6 +29,8 @@ class PageResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Oldalak';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Schema $schema): Schema
     {
         return PageForm::configure($schema);

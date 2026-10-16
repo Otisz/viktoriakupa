@@ -29,6 +29,8 @@ class DocumentTypeResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Dokumentum Típusok';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(Schema $schema): Schema
     {
         return DocumentTypeForm::configure($schema);

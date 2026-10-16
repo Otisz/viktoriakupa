@@ -31,6 +31,8 @@ class ClubResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Egyesületek';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Schema $schema): Schema
     {
         return ClubForm::configure($schema);
