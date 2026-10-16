@@ -4,7 +4,7 @@ export interface Auth {
   user: User;
 }
 
-export interface SharedData<T extends object = {}> extends T {
+export interface SharedData<T extends object = object> extends T {
   name: string;
   quote: { message: string; author: string };
   auth: Auth;

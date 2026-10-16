@@ -1,7 +1,7 @@
-/** biome-ignore-all lint/correctness/useUniqueElementIds: <explanation> */
+/** biome-ignore-all lint/correctness/useUniqueElementIds: static single-instance menu */
 
 import { Link, usePage } from "@inertiajs/react";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { VisuallyHidden } from "radix-ui";
 import { FaAlignRight, FaRegCircleXmark } from "react-icons/fa6";
 import { SiFacebook } from "react-icons/si";
 import { buttonVariants } from "@/components/ui/button";
@@ -37,9 +37,9 @@ export default function MobileMenu() {
               Navigációs menü bezárása
             </span>
           </SheetClose>
-          <VisuallyHidden asChild>
+          <VisuallyHidden.Root asChild>
             <SheetDescription className="hidden">Navigációs menü</SheetDescription>
-          </VisuallyHidden>
+          </VisuallyHidden.Root>
         </SheetHeader>
         <div className="h-full space-y-8 overflow-auto pb-32">
           <div className="grid grid-cols-1 divide-y divide-border">

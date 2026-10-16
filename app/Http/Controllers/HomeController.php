@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function aboutUs()
     {
-        $about = Post::page()->whereSlug('rolunk')->firstOrFail();
+        $about = Post::query()->page()->whereSlug('rolunk')->firstOrFail();
 
         return Inertia::render('about-us', [
             'about' => $about,
@@ -55,7 +55,7 @@ class HomeController extends Controller
 
     public function calendar()
     {
-        $calendar = Post::page()->whereSlug('versenynaptar')->firstOrFail();
+        $calendar = Post::query()->page()->whereSlug('versenynaptar')->firstOrFail();
 
         return Inertia::render('calendar', [
             'calendar' => $calendar,
