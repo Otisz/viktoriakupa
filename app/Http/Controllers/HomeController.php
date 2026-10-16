@@ -17,7 +17,7 @@ class HomeController extends Controller
             ->select(['id', 'title', 'slug', 'description', 'featured_image', 'published_at'])
             ->published()
             ->orderBy('published_at', 'desc')
-            ->limit(6)
+            ->limit(5)
             ->get();
 
         return Inertia::render('home', [

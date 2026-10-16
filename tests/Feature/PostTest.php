@@ -33,16 +33,16 @@ class PostTest extends TestCase
                 ->where('posts.data.0.featured_image_url', $published->featured_image_url));
     }
 
-    public function test_home_lists_the_latest_six_published_posts(): void
+    public function test_home_lists_the_latest_five_published_posts(): void
     {
-        Post::factory()->count(7)->create();
+        Post::factory()->count(6)->create();
         Post::factory()->draft()->create();
 
         $this->get(route('home'))
             ->assertOk()
             ->assertInertia(fn (AssertableInertia $page) => $page
                 ->component('home')
-                ->has('posts', 6));
+                ->has('posts', 5));
     }
 
     public function test_show_renders_a_published_post(): void
@@ -77,5 +77,17 @@ class PostTest extends TestCase
         $post->delete();
 
         $this->get(route('posts.show', $post->slug))->assertNotFound();
+    }
+
+    public function test_show_removes_blank_spacer_paragraphs(): void
+    {
+        $post = Post::factory()->create([
+            'content' => '<p><strong>Cím</strong></p><p style="text-align: center"><strong>&nbsp;</strong></p><p></p><p><br></p><p>Szöveg</p>',
+        ]);
+
+        $this->get(route('posts.show', $post->slug))
+            ->assertOk()
+            ->assertInertia(fn (AssertableInertia $page) => $page
+                ->where('post.content', '<p><strong>Cím</strong></p><p>Szöveg</p>'));
     }
 }

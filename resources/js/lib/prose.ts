@@ -1,0 +1,2 @@
+export const PROSE_CLASS_NAME =
+  "prose prose-lg prose-headings:font-normal prose-headings:break-words prose-headings:tracking-tight prose-headings:text-balance prose-strong:font-normal prose-strong:text-primary prose-a:text-primary prose-a:underline-offset-4 prose-a:[overflow-wrap:anywhere] prose-img:rounded-2xl prose-table:block prose-table:overflow-x-auto prose-table:text-base marker:text-primary [&_p:empty]:hidden";

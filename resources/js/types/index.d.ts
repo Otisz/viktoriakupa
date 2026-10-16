@@ -1,5 +1,6 @@
 export interface SharedData<T extends object = object> extends T {
   name: string;
+  canonicalUrl: string;
   documentTypes: Record<string, string>;
 }
 

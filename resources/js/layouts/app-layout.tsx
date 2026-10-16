@@ -1,27 +1,36 @@
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import type { ReactNode } from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Navbar from "@/components/navbar";
+import type { SharedData } from "@/types";
 
-export default function AppLayout({ children }: { children: ReactNode }) {
+export const DEFAULT_DESCRIPTION =
+  "A Viktória Kupa Versenysorozat országos akrobatikus torna verseny fiatal tehetségeknek. Versenynaptár, nevezés, szabályzatok és hírek egy helyen.";
+
+export default function AppLayout({ children, description }: { children: ReactNode; description?: string }) {
+  const content = description ?? DEFAULT_DESCRIPTION;
+  const { canonicalUrl } = usePage().props as unknown as SharedData;
+
   return (
     <>
       <Head>
-        <meta head-key="description" name="description" content="Viktoria Kupa" />
-        <meta property="og:title" content="Viktoria Kupa" />
-        <meta property="og:description" content="Viktoria Kupa" />
-        <meta property="og:image" content="https://viktoriakupa.hu/logo_vk.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Viktoria Kupa" />
-        <meta name="twitter:description" content="Viktoria Kupa" />
-        <meta name="twitter:image" content="https://viktoriakupa.hu/logo_vk.png" />
+        <link head-key="canonical" rel="canonical" href={canonicalUrl} />
+        <meta head-key="og:url" property="og:url" content={canonicalUrl} />
+        <meta head-key="description" name="description" content={content} />
+        <meta head-key="og:title" property="og:title" content="Viktória Kupa" />
+        <meta head-key="og:description" property="og:description" content={content} />
+        <meta head-key="og:image" property="og:image" content="https://viktoriakupa.hu/images/logo_vk.png" />
+        <meta head-key="og:type" property="og:type" content="website" />
+        <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
+        <meta head-key="twitter:title" name="twitter:title" content="Viktória Kupa" />
+        <meta head-key="twitter:description" name="twitter:description" content={content} />
+        <meta head-key="twitter:image" name="twitter:image" content="https://viktoriakupa.hu/images/logo_vk.png" />
       </Head>
-      <div className="min-h-[calc(100dvh---spacing(38))]">
+      <div className="flex min-h-dvh flex-col">
         <Header />
         <Navbar />
-        {children}
+        <div className="flex-1">{children}</div>
         <Footer />
       </div>
     </>

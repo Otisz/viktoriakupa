@@ -1,5 +1,6 @@
 import { Link, usePage } from "@inertiajs/react";
 import { ChevronDown } from "lucide-react";
+import RegistrationMenu from "@/components/registration-menu";
 import { buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -71,43 +72,9 @@ export default function DesktopMenu() {
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              className={cn(navigationMenuTriggerStyle(), buttonVariants(), "hover:text-primary-foreground")}
-            >
-              Nevezés{" "}
-              <ChevronDown
-                className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-popup-open:rotate-180"
-                aria-hidden="true"
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuGroup>
-                <DropdownMenuItem
-                  render={
-                    <a
-                      href={LINKS.apply_temp}
-                      aria-label="Tovább az ideiglenes jelentkezés oldalra (új lap)"
-                      title="Ideiglenes jelentkezés Google Forms-on keresztül"
-                    />
-                  }
-                >
-                  Ideiglenes nevezés
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  render={
-                    <a
-                      href={LINKS.apply_perma}
-                      aria-label="Tovább a végleges jelentkezés oldalra (új lap)"
-                      title="Végleges jelentkezés Google Forms-on keresztül"
-                    />
-                  }
-                >
-                  Végleges nevezés
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <RegistrationMenu
+            triggerClassName={cn(navigationMenuTriggerStyle(), buttonVariants(), "ml-2 hover:bg-primary/90")}
+          />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
