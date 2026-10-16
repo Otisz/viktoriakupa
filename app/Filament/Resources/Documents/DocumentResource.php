@@ -56,9 +56,4 @@ class DocumentResource extends Resource
             'edit' => EditDocument::route('/{record}/edit'),
         ];
     }
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::query()->count();
-    }
 }

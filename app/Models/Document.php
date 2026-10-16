@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Observers\DocumentObserver;
+use Database\Factories\DocumentFactory;
 use Illuminate\Database\Eloquent\Attributes\Appends;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +19,9 @@ use Illuminate\Support\Facades\Storage;
 ])]
 class Document extends Model
 {
+    /** @use HasFactory<DocumentFactory> */
+    use HasFactory;
+
     use HasUuids;
 
     protected function fileUrl(): Attribute

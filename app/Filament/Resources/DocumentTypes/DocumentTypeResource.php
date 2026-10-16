@@ -23,13 +23,13 @@ class DocumentTypeResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Tartalmak';
+    protected static string|UnitEnum|null $navigationGroup = 'Beállítások';
 
-    protected static ?string $modelLabel = 'Dokumentum Típus';
+    protected static ?string $modelLabel = 'Dokumentumtípus';
 
-    protected static ?string $pluralModelLabel = 'Dokumentum Típusok';
+    protected static ?string $pluralModelLabel = 'Dokumentumtípusok';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {
