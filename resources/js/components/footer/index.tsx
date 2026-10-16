@@ -1,5 +1,5 @@
 import { Link, usePage } from "@inertiajs/react";
-import { FaFacebookSquare } from "react-icons/fa";
+import FacebookIcon from "@/components/icons/facebook";
 import LINKS from "@/data/links";
 import type { SharedData } from "@/types";
 
@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
             <div className="flex justify-around">
               <Link href={LINKS.facebook} target="_blank" title="Facebook">
-                <FaFacebookSquare className="h-6 w-6 text-gray-500 hover:fill-[#4267B2]" />
+                <FacebookIcon className="h-6 w-6 text-gray-500 hover:text-[#4267B2]" />
                 <span className="sr-only">Facebook</span>
               </Link>
             </div>

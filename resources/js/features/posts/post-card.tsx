@@ -10,7 +10,7 @@ type Props = Readonly<{
 export default function PostCard(props: Props) {
   return (
     <Link href={`/hirek/${props.post.slug}`}>
-      <article className="group flex flex-col gap-2" data-flox="asd">
+      <article className="group flex flex-col gap-2">
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
           <img
             loading={props.loading}

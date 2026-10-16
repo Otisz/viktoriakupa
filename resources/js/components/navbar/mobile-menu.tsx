@@ -1,9 +1,9 @@
 /** biome-ignore-all lint/correctness/useUniqueElementIds: static single-instance menu */
 
 import { Link, usePage } from "@inertiajs/react";
+import { CircleX, TextAlignEnd } from "lucide-react";
 import { useState } from "react";
-import { FaAlignRight, FaRegCircleXmark } from "react-icons/fa6";
-import { SiFacebook } from "react-icons/si";
+import FacebookIcon from "@/components/icons/facebook";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -25,7 +25,7 @@ export default function MobileMenu() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger aria-label="Navigációs menü megnyitása" className="block lg:hidden">
-        <FaAlignRight className="h-8 w-8" />
+        <TextAlignEnd className="h-8 w-8" />
       </SheetTrigger>
       <SheetContent noClose className="w-full border-none bg-background p-0">
         <SheetHeader className="m-4 flex h-20 flex-row divide-x divide-background">
@@ -34,7 +34,7 @@ export default function MobileMenu() {
             className="m-0! inline-flex aspect-square h-full items-center justify-center rounded-xl border-2 border-border bg-accent/30 transition-all hover:border-orange-500 hover:bg-accent"
             aria-labelledby="close-navitaion-menu"
           >
-            <FaRegCircleXmark className="h-8 w-8" />
+            <CircleX className="h-8 w-8" />
             <span className="sr-only" id="close-navitaion-menu">
               Navigációs menü bezárása
             </span>
@@ -98,7 +98,7 @@ export default function MobileMenu() {
               title="Facebook"
               rel="noreferrer"
             >
-              <SiFacebook className="mx-auto size-12 fill-[#4267b2]" />
+              <FacebookIcon className="mx-auto size-12 text-[#4267b2]" />
             </a>
           </div>
         </div>
