@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/correctness/useUniqueElementIds: static single-instance menu */
 
 import { Link, usePage } from "@inertiajs/react";
-import { VisuallyHidden } from "radix-ui";
+import { useState } from "react";
 import { FaAlignRight, FaRegCircleXmark } from "react-icons/fa6";
 import { SiFacebook } from "react-icons/si";
 import { buttonVariants } from "@/components/ui/button";
@@ -19,9 +19,11 @@ import type { SharedData } from "@/types";
 
 export default function MobileMenu() {
   const page = usePage();
+  const [isOpen, setIsOpen] = useState(false);
+  const close = () => setIsOpen(false);
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger aria-label="Navigációs menü megnyitása" className="block lg:hidden">
         <FaAlignRight className="h-8 w-8" />
       </SheetTrigger>
@@ -37,47 +39,38 @@ export default function MobileMenu() {
               Navigációs menü bezárása
             </span>
           </SheetClose>
-          <VisuallyHidden.Root asChild>
-            <SheetDescription className="hidden">Navigációs menü</SheetDescription>
-          </VisuallyHidden.Root>
+          <SheetDescription className="sr-only">Navigációs menü</SheetDescription>
         </SheetHeader>
         <div className="h-full space-y-8 overflow-auto pb-32">
           <div className="grid grid-cols-1 divide-y divide-border">
-            <SheetClose asChild>
-              <Link href={LINKS.news} className="px-8 py-4">
-                Hírek
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link href={LINKS.about_us} className="px-8 py-4">
-                Rólunk
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link href={LINKS.clubs} className="px-8 py-4">
-                Egyesületek
-              </Link>
-            </SheetClose>
+            <Link href={LINKS.news} className="px-8 py-4" onClick={close}>
+              Hírek
+            </Link>
+            <Link href={LINKS.about_us} className="px-8 py-4" onClick={close}>
+              Rólunk
+            </Link>
+            <Link href={LINKS.clubs} className="px-8 py-4" onClick={close}>
+              Egyesületek
+            </Link>
             <div className="flex flex-col py-4">
               <span className="px-8">Dokumentumok</span>
               {Object.entries((page.props as unknown as SharedData).documentTypes).map(([slug, title]) => (
-                <SheetClose key={slug} asChild>
-                  <Link href={`/dokumentumok/${slug}`} className="px-12 py-2 text-muted-foreground">
-                    {title}
-                  </Link>
-                </SheetClose>
+                <Link
+                  key={slug}
+                  href={`/dokumentumok/${slug}`}
+                  className="px-12 py-2 text-muted-foreground"
+                  onClick={close}
+                >
+                  {title}
+                </Link>
               ))}
             </div>
-            <SheetClose asChild>
-              <Link href={LINKS.calendar} className="px-8 py-4">
-                Versenynaptár
-              </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link href={LINKS.contact} className="px-8 py-4" aria-label="Ugrás a kapcsolat oldalra">
-                Kapcsolat
-              </Link>
-            </SheetClose>
+            <Link href={LINKS.calendar} className="px-8 py-4" onClick={close}>
+              Versenynaptár
+            </Link>
+            <Link href={LINKS.contact} className="px-8 py-4" aria-label="Ugrás a kapcsolat oldalra" onClick={close}>
+              Kapcsolat
+            </Link>
           </div>
           <div className="flex flex-col gap-4 px-8">
             <a

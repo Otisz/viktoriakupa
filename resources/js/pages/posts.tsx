@@ -1,5 +1,5 @@
 import { Head, Link } from "@inertiajs/react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import PostCard from "@/featuers/posts/post-card";
 import PostsWrapper from "@/featuers/posts/posts-wrapper";
 import AppLayout from "@/layouts/app-layout";
@@ -24,19 +24,19 @@ export default function Page(props: SharedData<{ posts: Pagination<Omit<Post, "c
         <div className={cn("flex", [props.posts.prev_page_url ? "justify-between" : "justify-end"])}>
           {props.posts.prev_page_url ? (
             <div className="space-x-4">
-              <Button asChild variant="outline">
-                <Link href={props.posts.path}>« Legújabbak</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href={props.posts.prev_page_url}>« Újabbak</Link>
-              </Button>
+              <Link className={buttonVariants({ variant: "outline" })} href={props.posts.path}>
+                « Legújabbak
+              </Link>
+              <Link className={buttonVariants({ variant: "outline" })} href={props.posts.prev_page_url}>
+                « Újabbak
+              </Link>
             </div>
           ) : null}
           <div>
             {props.posts.next_page_url ? (
-              <Button asChild variant="outline">
-                <Link href={props.posts.next_page_url}>Régebbiek »</Link>
-              </Button>
+              <Link className={buttonVariants({ variant: "outline" })} href={props.posts.next_page_url}>
+                Régebbiek »
+              </Link>
             ) : null}
           </div>
         </div>
