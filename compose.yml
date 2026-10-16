@@ -4,6 +4,7 @@ x-php: &php
     - .:/var/www/html
   environment:
     INERTIA_SSR_URL: http://ssr:13714
+    INERTIA_SSR_HOT_URL: http://bun:5173
   depends_on:
     mysql:
       condition: service_healthy

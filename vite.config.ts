@@ -1,4 +1,5 @@
 import { resolve } from "node:path";
+import inertia from "@inertiajs/vite";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import laravel from "laravel-vite-plugin";
@@ -11,10 +12,12 @@ export default defineConfig({
       ssr: "resources/js/ssr.tsx",
       refresh: true,
     }),
+    inertia(),
     react(),
     tailwindcss(),
   ],
   server: {
+    allowedHosts: ["bun"],
     hmr: {
       host: "localhost",
     },
