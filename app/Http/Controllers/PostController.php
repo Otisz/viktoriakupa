@@ -29,8 +29,18 @@ class PostController extends Controller
             ->whereSlug($slug)
             ->firstOrFail();
 
+        $post->content = $this->withoutBlankParagraphs($post->content);
+
         return Inertia::render('post', [
             'post' => $post,
         ]);
+    }
+
+    /**
+     * Remove paragraphs the editor left as spacers, such as `<p><strong>&nbsp;</strong></p>`.
+     */
+    private function withoutBlankParagraphs(string $html): string
+    {
+        return preg_replace('#<p\b[^>]*>(?:\s|&nbsp;|\x{00A0}|<br\s*/?>|</?(?:strong|em|b|i|u|s|span)\b[^>]*>)*</p>#iu', '', $html) ?? $html;
     }
 }

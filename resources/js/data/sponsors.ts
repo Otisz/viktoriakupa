@@ -1,10 +1,11 @@
+import Expodom from "@/assets/images/expodom.png";
 import GaborMester from "@/assets/images/gabor_mester.jpeg";
-import LeventeOtta from "@/assets/images/levente_otta.jpeg";
+import LeventeOtta from "@/assets/images/levente_otta.svg";
 
 export default [
   {
     name: "Expodom",
-    image: "https://www.expodom.hu/assets/parent-theme/img/expodom-logo-hu.png?v=1771415848",
+    image: Expodom,
     href: "https://expodom.hu/",
   },
   {

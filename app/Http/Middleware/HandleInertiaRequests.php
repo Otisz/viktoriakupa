@@ -39,7 +39,18 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'canonicalUrl' => fn (): string => $this->canonicalUrl($request),
             'documentTypes' => DocumentType::query()->orderBy('title')->pluck('title', 'slug'),
         ];
+    }
+
+    /**
+     * The current URL without query parameters, keeping the page number of paginated listings.
+     */
+    private function canonicalUrl(Request $request): string
+    {
+        $page = $request->integer('page');
+
+        return $page > 1 ? $request->url().'?page='.$page : $request->url();
     }
 }

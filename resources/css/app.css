@@ -3,6 +3,8 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "../views";
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 
@@ -64,28 +66,39 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  --color-nav: var(--nav);
+  --color-nav-foreground: var(--nav-foreground);
+
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
 }
 
 :root {
   --background: oklch(0.9735 0.0076 241.66);
-  --foreground: oklch(0.141 0.004 285.823);
-  --card: oklch(1 0 89.876);
-  --card-foreground: oklch(0.141 0.004 285.823);
-  --popover: oklch(1 0 89.876);
-  --popover-foreground: oklch(0.141 0.004 285.823);
+  --foreground: oklch(0.2 0.03 255);
+  --card: oklch(0.995 0.002 255);
+  --card-foreground: oklch(0.2 0.03 255);
+  --popover: oklch(0.995 0.002 255);
+  --popover-foreground: oklch(0.2 0.03 255);
   --primary: oklch(0.264 0.0678 255.34);
   --primary-foreground: oklch(0.985 0 89.876);
   --secondary: oklch(0.6093 0.1819 257.29);
   --secondary-foreground: oklch(0.967 0.001 286.375);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.014 285.938);
+  --muted: oklch(0.945 0.012 250);
+  --muted-foreground: oklch(0.47 0.03 255);
   --accent: oklch(0.6093 0.1819 257.29);
-  --accent-foreground: oklch(0.21 0.006 285.885);
+  --accent-foreground: oklch(0.2 0.03 255);
   --destructive: oklch(0.637 0.208 25.331);
   --destructive-foreground: oklch(0.985 0 89.876);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.141 0.004 285.823);
+  --border: oklch(0.9 0.014 250);
+  --input: oklch(0.9 0.014 250);
+  --ring: oklch(0.6093 0.1819 257.29);
+  --nav: oklch(0.54 0.17 257);
+  --nav-foreground: oklch(0.967 0.001 286.375);
+  --ink: oklch(0.205 0.05 258);
+  --ink-foreground: oklch(0.93 0.012 250);
+  /* Radius rule: controls and menus use rounded-lg (--radius), media and content surfaces use rounded-2xl. */
   --radius: 0.5rem;
 }
 
@@ -99,7 +112,110 @@
     @apply border-border;
   }
 
+  html {
+    color-scheme: light;
+    font-synthesis-weight: none;
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+/* Sections ease in as they enter the viewport; static without scroll-timeline support or with reduced motion. */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: reveal-up cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+/* Competition calendar: the CMS table renders as a styled table on md+ and as one card per event below md. */
+@utility calendar-content {
+  & p {
+    margin: 0;
+  }
+
+  & p:empty {
+    display: none;
+  }
+
+  & strong {
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  & a {
+    @apply text-primary underline underline-offset-4;
+  }
+
+  & > p,
+  & > ul,
+  & > ol {
+    @apply mb-4 max-w-[65ch] leading-relaxed;
+  }
+
+  & table {
+    @apply w-full border-separate border-spacing-0 text-left;
+  }
+
+  & tbody > tr:first-child {
+    @apply hidden md:table-row;
+  }
+
+  & tbody > tr:first-child > * {
+    @apply bg-primary px-5 py-3 font-normal text-primary-foreground text-sm first:rounded-tl-2xl last:rounded-tr-2xl;
+  }
+
+  & tbody > tr:first-child > *::first-letter {
+    text-transform: uppercase;
+  }
+
+  & tbody > tr:not(:first-child) {
+    @apply mb-4 block rounded-2xl border bg-card p-5 md:mb-0 md:table-row md:rounded-none md:border-0 md:bg-transparent md:p-0;
+  }
+
+  & tbody > tr:not(:first-child) > * {
+    @apply block py-1.5 align-top font-normal md:table-cell md:border-b md:bg-card md:px-5 md:py-4;
+  }
+
+  & tbody > tr:not(:first-child) > *::before {
+    @apply block text-muted-foreground text-xs md:hidden;
+    content: attr(data-label);
+  }
+
+  & tbody > tr:not(:first-child) > :first-child {
+    @apply pb-3 text-lg leading-snug md:pb-4 md:border-l;
+  }
+
+  & tbody > tr:not(:first-child) > :first-child::before {
+    display: none;
+  }
+
+  & tbody > tr:not(:first-child) > :last-child {
+    @apply md:border-r;
+  }
+
+  & tbody > tr:last-child > :first-child {
+    @apply md:rounded-bl-2xl;
+  }
+
+  & tbody > tr:last-child > :last-child {
+    @apply md:rounded-br-2xl;
+  }
+
+  & td p + p,
+  & th p + p {
+    @apply mt-1 text-muted-foreground text-sm;
   }
 }

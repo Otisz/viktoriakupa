@@ -10,17 +10,21 @@ export default function Page(props: SharedData<{ posts: Pagination<Omit<Post, "c
   let imageCount = 0;
 
   return (
-    <AppLayout>
+    <AppLayout description="Friss hírek, eredmények és beszámolók a Viktória Kupa Versenysorozat akrobatikus torna versenyeiről.">
       <Head title="Hírek"></Head>
-      <main className="container space-y-8 px-4 pt-8 pb-20">
-        <h1 className="text-5xl">Hírek</h1>
-        <div className="flex flex-wrap justify-center gap-4">
-          <PostsWrapper>
+      <main className="container max-w-7xl space-y-10 py-16 md:py-20">
+        <h1 className="text-3xl tracking-tight break-words md:text-5xl">Hírek</h1>
+        {props.posts.data.length > 0 ? (
+          <PostsWrapper className="reveal">
             {props.posts.data.map((post) => (
               <PostCard key={post.slug} post={post} loading={imageCount++ < 9 ? "eager" : "lazy"} />
             ))}
           </PostsWrapper>
-        </div>
+        ) : (
+          <p className="rounded-2xl border border-dashed bg-card px-6 py-12 text-center text-muted-foreground">
+            Még nincsenek megjelent hírek. Nézz vissza hamarosan!
+          </p>
+        )}
         <div className={cn("flex", [props.posts.prev_page_url ? "justify-between" : "justify-end"])}>
           {props.posts.prev_page_url ? (
             <div className="space-x-4">

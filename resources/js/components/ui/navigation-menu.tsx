@@ -36,12 +36,11 @@ function NavigationMenuItem({ ...props }: NavigationMenuPrimitive.Item.Props) {
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 font-medium transition-colors " +
-    "hover:bg-muted/30 hover:text-accent-foreground " +
-    "focus:bg-muted/30 focus:text-accent focus:outline-none " +
+  "group inline-flex h-10 w-max items-center justify-center rounded-lg bg-transparent px-4 py-2 transition-colors " +
+    "hover:bg-primary/20 " +
+    "focus-visible:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground " +
     "disabled:pointer-events-none disabled:opacity-50 " +
-    "data-popup-open:text-accent data-popup-open:bg-muted/30 " +
-    "data-popup-open:hover:bg-muted/30 data-popup-open:focus:bg-muted/30",
+    "data-popup-open:bg-primary/20",
 );
 
 function NavigationMenuTrigger({ className, children, ...props }: NavigationMenuPrimitive.Trigger.Props) {

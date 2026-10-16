@@ -4,6 +4,7 @@ import { Link, usePage } from "@inertiajs/react";
 import { CircleX, TextAlignEnd } from "lucide-react";
 import { useState } from "react";
 import FacebookIcon from "@/components/icons/facebook";
+import { REGISTRATION_LINKS } from "@/components/registration-menu";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -29,9 +30,9 @@ export default function MobileMenu() {
       </SheetTrigger>
       <SheetContent noClose className="w-full border-none bg-background p-0">
         <SheetHeader className="m-4 flex h-20 flex-row divide-x divide-background">
-          <SheetTitle className="flex flex-1 items-center px-4 font-bold text-2xl">Menü</SheetTitle>
+          <SheetTitle className="flex flex-1 items-center px-4 text-2xl">Menü</SheetTitle>
           <SheetClose
-            className="m-0! inline-flex aspect-square h-full items-center justify-center rounded-xl border-2 border-border bg-accent/30 transition-all hover:border-orange-500 hover:bg-accent"
+            className="m-0! inline-flex aspect-square h-full items-center justify-center rounded-lg border-2 border-border bg-muted transition-all hover:border-primary active:scale-[0.98]"
             aria-labelledby="close-navitaion-menu"
           >
             <CircleX className="h-8 w-8" />
@@ -58,7 +59,7 @@ export default function MobileMenu() {
                 <Link
                   key={slug}
                   href={`/dokumentumok/${slug}`}
-                  className="px-12 py-2 text-muted-foreground"
+                  className="px-12 py-2 text-muted-foreground hover:text-foreground"
                   onClick={close}
                 >
                   {title}
@@ -73,22 +74,19 @@ export default function MobileMenu() {
             </Link>
           </div>
           <div className="flex flex-col gap-4 px-8">
-            <a
-              className={buttonVariants({ size: "lg" })}
-              href={LINKS.apply_temp}
-              aria-label="Tovább az ideiglenes jelentkezés oldalra (új lap)"
-              title="Ideiglenes jelentkezés Google Forms-on keresztül"
-            >
-              Ideiglenes nevezés
-            </a>
-            <a
-              className={buttonVariants({ size: "lg" })}
-              href={LINKS.apply_perma}
-              aria-label="Tovább a végleges jelentkezés oldalra (új lap)"
-              title="Végleges jelentkezés Google Forms-on keresztül"
-            >
-              Végleges nevezés
-            </a>
+            {REGISTRATION_LINKS.map((link) => (
+              <a
+                key={link.href}
+                className={buttonVariants({ size: "lg" })}
+                href={link.href}
+                target="_blank"
+                rel="noopener"
+                aria-label={link.ariaLabel}
+                title={link.title}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
           <div className="grid grid-cols-1 gap-4 px-8">
             <a
@@ -98,7 +96,7 @@ export default function MobileMenu() {
               title="Facebook"
               rel="noreferrer"
             >
-              <FacebookIcon className="mx-auto size-12 text-[#4267b2]" />
+              <FacebookIcon className="mx-auto size-12 text-primary" />
             </a>
           </div>
         </div>
