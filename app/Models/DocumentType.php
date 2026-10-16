@@ -13,11 +13,13 @@ class DocumentType extends Model
 
     protected static function boot()
     {
-        self::creating(fn (self $model) => $model->setAttribute('slug', Str::slug($model->title)));
-
         parent::boot();
+        self::creating(fn (self $model) => $model->setAttribute('slug', Str::slug($model->title)));
     }
 
+    /**
+     * @return HasMany<Document, $this>
+     */
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);

@@ -20,7 +20,7 @@ class DocumentForm
                     ->required(),
                 Select::make('document_type_id')
                     ->label('Típus')
-                    ->options(DocumentType::pluck('title', 'id'))
+                    ->options(DocumentType::query()->pluck('title', 'id'))
                     ->required(),
                 FileUpload::make('file_path')
                     ->directory('documents')
