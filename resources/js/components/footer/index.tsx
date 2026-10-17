@@ -1,5 +1,6 @@
 import { Link, usePage } from "@inertiajs/react";
 import { Heart } from "lucide-react";
+import { useCookieConsent } from "@/components/cookie-consent";
 import FacebookIcon from "@/components/icons/facebook";
 import LINKS from "@/data/links";
 import type { SharedData } from "@/types";
@@ -8,6 +9,7 @@ const linkClassName = "text-ink-foreground/75 text-sm leading-6 transition-color
 
 export default function Footer() {
   const page = usePage();
+  const cookieConsent = useCookieConsent();
 
   return (
     <footer className="bg-ink text-ink-foreground">
@@ -90,6 +92,15 @@ export default function Footer() {
         </div>
         <div className="mt-16 space-y-2 border-ink-foreground/10 border-t pt-8">
           <p className="text-ink-foreground/60 text-xs leading-5">&copy; 2026 Mester Gábor. Minden jog fenntartva.</p>
+          {cookieConsent && (
+            <button
+              type="button"
+              onClick={cookieConsent.openSettings}
+              className="text-ink-foreground/60 text-xs leading-5 hover:underline"
+            >
+              Sütibeállítások
+            </button>
+          )}
           <p className="text-ink-foreground/60 text-xs leading-5" lang="en">
             Made with <Heart className="inline size-3.5 fill-current align-[-2px]" role="img" aria-label="love" /> by{" "}
             <a href="https://leventeotta.com" target="_blank" className="hover:underline" rel="noreferrer">
