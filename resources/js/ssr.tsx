@@ -23,7 +23,6 @@ createServer((page) =>
           options={{
             api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
             defaults: "2025-05-24",
-            capture_exceptions: true,
             debug: import.meta.env.MODE === "development",
           }}
         >
